@@ -1,0 +1,17 @@
+"use client"
+import React from 'react'
+import 
+import Link from 'next/link'
+
+const Login = () => {
+    
+  return (
+    <div>
+        <h1>welcome to next.js</h1>
+        <Link href={"/contact"}>Click Me</Link>
+
+    </div>
+  )
+}
+
+export default Login
