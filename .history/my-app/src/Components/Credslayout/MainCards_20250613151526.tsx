@@ -1,0 +1,24 @@
+import React from 'react'
+import Cards from '../Main/Cards'
+import {electronics} from "../../JsObjects/Products/Products"
+
+export const MainCards = () => {
+    const data:string|number|any = electronics
+   
+  return (
+
+    <div className='flex justify-center mt-2  items-center'>
+        <div className='flex flex-wrap w-369 justify-around bg-white '>
+           {
+            data.map((e:string|number|any) =>(
+         <Cards value={e} key={e.id} id={e.id} />
+      ))}
+           
+       
+        </div>
+        
+       
+
+    </div>
+  )
+}
