@@ -9,8 +9,9 @@ import ShopInfinity from "../../../public/assets/shopinfinity-icon.png"
 
 const Nav = () => {
     return (
-        <div className='p-2 bg-white'>
-            <header className='flex justify-around pt-3'>
+        <div className='p-2 bg-white sticky top-0 z-50 shadow-md'>
+
+            <header className='flex justify-around pt-3 flex-wrap '>
                 {/* Logo */}
                 <div className='cursor-pointer'>
                     <Image src={ShopInfinity} alt='shopinfinity' className='bg-transparent' width={100} />

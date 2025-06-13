@@ -35,80 +35,77 @@ const MainCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full max-w-screen-xl mx-auto">
-    {/* Carousel wrapper */}
-    <div className="relative h-60 overflow-hidden rounded-lg">
-      {images.map((src, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-            index === currentIndex ? 'opacity-100' : 'opacity-0'
+    <div className="relative w-full max-w-screen-xxl mx-auto pl-10 pr-10 mt-2">
+
+  {/* Carousel wrapper */}
+  <div className="relative h-60 overflow-hidden rounded-lg">
+    {images.map((src, index) => (
+      <div
+        key={index}
+        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+          index === currentIndex ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <Image
+          src={src}
+          alt={`Slide ${index + 1}`}
+          fill
+          className="object-cover"
+          priority={index === 0}
+        />
+      </div>
+    ))}
+
+    {/* Previous Button */}
+    <button
+      onClick={prevSlide}
+      className="absolute top-1/2 left-4 z-30 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition"
+      aria-label="Previous"
+    >
+      <svg
+        className="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 6 10"
+      >
+        <path d="M5 1 1 5l4 4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+
+    {/* Next Button */}
+    <button
+      onClick={nextSlide}
+      className="absolute top-1/2 right-4 z-30 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition"
+      aria-label="Next"
+    >
+      <svg
+        className="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 6 10"
+      >
+        <path d="m1 9 4-4-4-4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+
+    {/* Indicators */}
+    <div className="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
+      {images.map((_, i) => (
+        <button
+          key={i}
+          onClick={() => goToSlide(i)}
+          className={`w-3 h-3 rounded-full border-2 ${
+            i === currentIndex ? 'bg-white' : 'bg-white/70'
           }`}
-        >
-          <Image
-            src={src}
-            alt={`Slide ${index + 1}`}
-            fill
-            className="object-contain"
-            priority={index === 0}
-          />
-        </div>
+          aria-label={`Slide ${i + 1}`}
+        />
       ))}
     </div>
-  
+  </div>
+</div>
 
-      {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
-        {images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goToSlide(i)}
-            className={`w-3 h-3 rounded-full cursor-pointer ${
-              i === currentIndex ? 'bg-white' : 'bg-white/70'
-            }`}
-            aria-label={`Slide ${i + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Previous Button */}
-      <button
-        onClick={prevSlide}
-        className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 group focus:outline-none cursor-pointer"
-        aria-label="Previous"
-      >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 group-focus:ring-2 group-focus:ring-white">
-          <svg
-            className="w-4 h-4 text-white"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 6 10"
-          >
-            <path d="M5 1 1 5l4 4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </span>
-      </button>
-
-      {/* Next Button */}
-      <button
-        onClick={nextSlide}
-        className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 group focus:outline-none cursor-pointer"
-        aria-label="Next"
-      >
-        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 group-focus:ring-2 group-focus:ring-white">
-          <svg
-            className="w-4 h-4 text-white"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 6 10"
-          >
-            <path d="m1 9 4-4-4-4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </span>
-      </button>
-    </div>
   );
 };
 

@@ -5,7 +5,7 @@ const MainFilter = () => {
         <div className='pt-2 pb-2 pl-10 pr-10'>
             {/* Quick Products  */}
 
-            <div className='flex justify-around p-5 bg-white rounded-2'>
+            <div className='flex justify-around p-5 bg-white rounded-2 flex-wrap'>
                 <div className='flex flex-col items-center cursor-pointer bg-transparent'>
                     <div>
                         <img src="https://rukminim2.flixcart.com/flap/80/80/image/29327f40e9c4d26b.png?q=100" width={50} alt="Kilo" />
