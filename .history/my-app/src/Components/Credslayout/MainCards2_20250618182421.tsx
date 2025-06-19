@@ -7,7 +7,7 @@ export const MainCards2 = () => {
   return (
     <div className='grid  justify-center mt-2  items-center '>
         
-    <div className='flex  flex-wrap w-360 justify-around bg-white '>
+    <div className='flex flex-col  w-360 justify-around bg-white '>
         <h3 className='p-3 text-2xl'>Sports, Healthcare & more</h3>
         <div className='grid sm:grid-cols-1 lg:grid-cols-7 lg w-360 justify-around bg-white'>
             {
