@@ -8,18 +8,32 @@ import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import ShopInfinity from "../../../public/assets/shopinfinity-icon.png";
+import products from "@/JsObjects/sepProduct/All.json";
 
 const Nav = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  const LoginHandel = () => {
-    router.push('/login');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    setShowSuggestions(true);
   };
+
+  const handleSelect = (category: string) => {
+    router.push(`/filtercard?category=${category}`)
+    setQuery('');
+    setShowSuggestions(false);
+  };
+
+  const filtered = products.filter((item) =>
+    item.name.toLowerCase().includes(query.toLowerCase())
+  ).slice(0, 5); // limit to 5 suggestions
 
   return (
     <div className='p-2 bg-white sticky top-0 z-50 shadow-md'>
-      <header className='flex justify-between items-center px-4 lg:px-12 py-2'>
+      <header className='flex justify-between items-center px-4 lg:px-12 py-2 relative'>
         {/* Logo & Hamburger */}
         <div className='flex items-center gap-4'>
           <div onClick={() => setMenuOpen(!menuOpen)} className='block lg:hidden cursor-pointer text-2xl'>
@@ -31,16 +45,44 @@ const Nav = () => {
         </div>
 
         {/* Search box */}
-        <div className='flex items-center w-full max-w-md border border-gray-300 rounded overflow-hidden mx-4'>
-          <input type="search" className='px-4 py-2 w-full outline-none' placeholder='Search for products' />
-          <button className='px-3 text-black'>
-            <FaSearch />
-          </button>
+        <div className='relative w-full max-w-md'>
+          <div className='flex items-center w-full border border-gray-300 rounded overflow-hidden'>
+            <input
+              onChange={handleChange}
+              value={query}
+              type="search"
+              className='px-4 py-2 w-full outline-none'
+              placeholder='Search for products'
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              onFocus={() => query && setShowSuggestions(true)}
+            />
+            <button className='px-3 text-black'>
+              <FaSearch />
+            </button>
+          </div>
+
+          {showSuggestions && query && (
+            <div className='absolute top-12 left-0 w-full bg-white border border-gray-200 shadow-lg rounded-md z-50 max-h-60 overflow-y-auto'>
+              {filtered.length > 0 ? (
+                filtered.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => handleSelect(item.category)}
+                    className='px-4 py-2 cursor-pointer hover:bg-gray-100'
+                  >
+                    {item.name}
+                  </div>
+                ))
+              ) : (
+                <div className='px-4 py-2 text-gray-500'>No matches found</div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Desktop Nav Items */}
         <div className='hidden lg:flex items-center gap-6'>
-          <div onClick={LoginHandel} className='flex gap-2 items-center cursor-pointer'>
+          <div onClick={() => router.push('/login')} className='flex gap-2 items-center cursor-pointer'>
             <FaUser className="text-lg" />
             <span>Login</span>
           </div>
@@ -61,7 +103,7 @@ const Nav = () => {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="lg:hidden px-6 pb-4 animate-slide-down">
-          <div onClick={LoginHandel} className='flex items-center gap-2 py-2 border-b cursor-pointer'>
+          <div onClick={() => router.push('/login')} className='flex items-center gap-2 py-2 border-b cursor-pointer'>
             <FaUser />
             <span>Login</span>
           </div>
