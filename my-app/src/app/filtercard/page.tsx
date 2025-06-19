@@ -1,16 +1,20 @@
 'use client'
+
+import React, { Suspense } from 'react'
 import FilterCards from '@/Components/Main/FilterCards'
 import Nav from '@/Components/Navbar/Nav'
-import React from 'react'
 
-const page = () => {
+const Page = () => {
   return (
     <div>
-        <Nav />
+      <Nav />
+
+      <Suspense fallback={<div className="text-center p-4">Loading Products...</div>}>
         <FilterCards />
+      </Suspense>
       
     </div>
   )
 }
 
-export default page
+export default Page
