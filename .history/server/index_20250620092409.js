@@ -1,0 +1,17 @@
+import express from "express"
+import  dotenv from "dotenv"
+
+dotenv.config()
+
+const port = process.env.PORT;
+const app = express();
+
+app.use(e)
+
+
+
+app.listen(port,()=>{
+    console.log(`your server is running on the port ${port}`)
+})
+
+

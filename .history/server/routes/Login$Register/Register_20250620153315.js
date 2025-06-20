@@ -1,0 +1,8 @@
+
+export const Register = async(req,res)=>{
+        const {userName,email,password} = {
+            if(!userName|email|password){
+
+            }
+        }
+}
